@@ -1,52 +1,66 @@
 package orders;
 
-import item.details.Item;
-enum TaxStatus{taxable,nontaxable}
+import items.Item;
+
 
 public class OrderDetail {
 
-	int quantity;
-	TaxStatus taxStatus;
-	Order order;
-	public Item item;
+	private int quantity;
+	private String taxStatus;
+	private Order order;
+	private Item item;
+	double	subTotal=0.0;
 	
 	public int getQuantity() {
 		
 		return quantity;
 	}
-	public boolean setQuantity(int quantity) {
+	public void setQuantity(int quantity) {
+		if(quantity<0)
+		{
+			
+			return;
+		}
 		this.quantity = quantity;
-		return true;
 	}
-	public TaxStatus getTaxStatus() {
+	public String getTaxStatus() {
 		return taxStatus;
 	}
-	public boolean setTaxStatus(TaxStatus taxStatus) {
-		this.taxStatus = taxStatus;
-		return true;
+	public void setTaxStatus(String taxStatus) {
+		
+			this.taxStatus=taxStatus;
+		
+		
 	}
 	public Order getOrder() {
 		return order;
 	}
-	public boolean setOrder(Order order) {
-		this.order = order;
-		return true;
+	public void setOrder(Order order) {
+		if((order instanceof Order)&&order!=null)
+		{
+			this.order=order;
+		}
+		return;
+		
 	}
 	public Item getItem() {
 		return item;
 	}
-	public boolean setItem(Item item) {
-		this.item = item;
-		return true;
+	public void setItem(Item item) {
+		if((item instanceof Item)&&item!=null)
+		{
+			this.item=item;
+		}
+		return;
 	}
 	public double calcSubTotal()
 	{
-		double	subTotal= (item.getPriceForQuantity()) * quantity;
+		subTotal= (item.getPriceForQuantity()) * quantity;
 		return subTotal;		
 	}
 	public double  calcWeight()
 	{
-		double subWeight = (Integer.parseInt(item.getShippingWeight())) * quantity;
+		double subWeight = (item.getShippingWeight())* quantity;
 	
 		return subWeight;
 	}

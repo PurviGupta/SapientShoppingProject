@@ -1,40 +1,34 @@
 package customer;
 
-import item.details.Item;
 import orders.Order;
-import orders.OrderDetail;
-import payment.details.Payment;
 
 public class NewCustomer {
 
 	
 	private String name;
 	private String address;
-	private Order order;
-	private Payment payment;
-	
+	private Order order=null;
 	public String getName() {
-		return this.name;
+		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
 	public String getAddress() {
-		return this.address;
+		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
 	public Order getOrder() {
-		return this.order;
+		return order;
 	}
 	public void setOrder(Order order) {
+		if((order instanceof Order)&&order!=null){
 		this.order = order;
+		}
+		
+		return;
+	
 	}
-
-	/*public void addItemToCart(Item item, Integer quantity) {
-		//this adds Item to cart
-		OrderDetail newOrderDetail = new OrderDetail();
-		order.getOrderDetail().add(newOrderDetail);
-	}*/
 }

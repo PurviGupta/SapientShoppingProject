@@ -2,95 +2,61 @@ package shopTest;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import payment.details.Credit;
+import payment.Credit;
 
-public class creditTest {
+public class CreditTest {
 
+	Credit credit=new Credit();
+	int creditCardNumber;
+	Date expDate=new Date(2016-12-12);
+	String cardType;
 	@Before
 	public void setUp() throws Exception {
-		Credit credit = new Credit();
+		credit.setNumber(12345432);
+		credit.setType("Visa");
+		credit.setexpiryDate(expDate);
+		
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		credit=null;
-	}
-
-/*	@Test
-	public final void testGetNumber() {
-		fail("Not yet implemented");
-	}
-	
-	
 	@Test
-	public final void testSetNumber() {
-		fail("Not yet implemented");
+	public final void testGetNumber() {
+		int expectedResult=12345432;
+		creditCardNumber=credit.getNumber();
+		assertEquals(expectedResult, creditCardNumber);
 	}
+
+	
 
 	@Test
 	public final void testGetType() {
-		fail("Not yet implemented");
+	String expectedResult="Visa";
+	cardType=credit.getType();
+	assertEquals(expectedResult, cardType);
 	}
 
-	@Test
-	public final void testSetType() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testGetExpDate() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testSetExpDate() {
-		fail("Not yet implemented");
-	}
-*/
-
-	@Test
-	public final void testAuthorisedForWrongNoOfDigitsInNumber() throws ParseException {
-	Credit.setNumber(123456789L);
-	credit.setType("VISA");
-    credit.setExpDate("2025-12-31");
-	boolean expectedResult=false;
-    boolean actualResult=credit.authorized();
-	assertEquals(expectedResult, actualResult);
-
-}
-	@Test
-	public final void testAuthorisedForExpiredCreditCard() throws ParseException {
-	credit.setNumber(123456789123L);
-	credit.setType("VISA");
-    credit.setExpDate("2012-09-03");
-	boolean expectedResult=false;
-    boolean actualResult=credit.authorized();
-	assertEquals(expectedResult, actualResult);
-
-}
-	@Test
-	public final void testAuthorisedForNegativeNumber() throws ParseException {
-	credit.setNumber(-123456789123L);
-	credit.setType("VISA");
-    credit.setExpDate("2025-12-31");
-	boolean expectedResult=false;
-    boolean actualResult=credit.authorized();
-	assertEquals(expectedResult, actualResult);
-
-}
-	@Test
-	public void testAuthorisedForCorrectCreditCardDetails() throws ParseException {
-		credit.setNumber(123456789123L);
-	    credit.setType("VISA");
-	    credit.setExpDate("2025-12-31");
-		boolean expectedResult=true;
-        boolean actualResult=credit.authorized();
-		assertEquals(expectedResult, actualResult);
 	
+
+	@Test
+	public final void testGetexpiryDate() {
+	Date expiryDate1=credit.getexpiryDate();
+    assertEquals(expiryDate1, expDate);
 	}
 
+
+	@Test
+	public final void testAuthorization() {
+		boolean Result=credit.authorization();
+		assertTrue(Result);
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+	}
+	
 }

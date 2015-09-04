@@ -1,88 +1,86 @@
 package shopTest;
-
+import items.*;
 import static org.junit.Assert.*;
-import item.details.Item;
+import orders.Order;
 import orders.OrderDetail;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class orderDetailTest {
+import customer.NewCustomer;
+
+public class OrderDetailTest {
 OrderDetail testOrderDetail= new OrderDetail();
+Order testOrder = null;
+Item testItem = null;
 
 	@Before
 	public void setUp() throws Exception {
-	testOrderDetail.item=new Item();
-	testOrderDetail.setQuantity(5);
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public final void testSetQuantity() {
-			//assertTrue(testOrderDetail.setQuantity(5));
-	}
+	 testOrder = new Order();
+	 testItem=new Item();
 	
-	@Test
-	public final void testGetQuantity() {
-		//assertEquals(expected, actual);
+	
 	}
 
 	
-
 	@Test
-	public final void testGetTaxStatus() {
-		fail("Not yet implemented");
+	public final void testQuantity() {
+		int expectedQuantity = 5;
+		 
+		testOrderDetail.setQuantity(expectedQuantity);
+		int actualQuantity=testOrderDetail.getQuantity();
+	    assertEquals(expectedQuantity, actualQuantity);		
+	}
+	
+	
+	@Test
+	public final void testTaxStatus() {
+		String expectedTaxStatus = "taxable";
+		testOrderDetail.setTaxStatus(expectedTaxStatus);;
+		String actualTaxStatus=testOrderDetail.getTaxStatus();
+	    assertTrue(actualTaxStatus.equalsIgnoreCase(expectedTaxStatus))	;
 	}
 
 	@Test
-	public final void testSetTaxStatus() {
-		fail("Not yet implemented");
+	public final void testOrder() {
+		testOrderDetail.setOrder(testOrder);
+		Order actualOrder=testOrderDetail.getOrder();
+	    assertEquals(testOrder, actualOrder);	
 	}
 
 	@Test
-	public final void testGetOrder() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testSetOrder() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testGetItem() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testSetItem() {
-		fail("Not yet implemented");
+	public final void testItem() {
+		
+		testOrderDetail.setItem(testItem);
+		Item actualItem=testOrderDetail.getItem();
+	    assertEquals(testItem, actualItem);	
 	}
 
 	@Test
 	public final void testCalcSubTotal() {
-		testOrderDetail.item.setPriceForQuantity(500.52);
-		double priceForQuantity = testOrderDetail.item.getPriceForQuantity();
-		double actual = priceForQuantity * testOrderDetail.getQuantity();
-		double expected = 2502.60;
-		assertEquals(expected, actual, 0.5);
+		testItem.setPriceForQuantity(200);
+		testOrderDetail.setQuantity(5);
+		testOrderDetail.setItem(testItem);
+		double actual = testOrderDetail.calcSubTotal();
+		double expected = 1000;
+		assertEquals(expected, actual, 0.1);
 	}
 
 	@Test
 	public final void testCalcWeight() {
-		testOrderDetail.item.setShippingWeight(500.52);
-		double shippingWeight = testOrderDetail.item.getShippingWeight();
-		double actual = shippingWeight * testOrderDetail.getQuantity();
-		double expected = 2502.60;
-		assertEquals(expected, actual, 0.5);
+		testItem.setShippingWeight(500.00);
+		testOrderDetail.setQuantity(5);
+		testOrderDetail.setItem(testItem);
+		double expectedWeight=2500.0;
+		double actualWeight = testOrderDetail.calcWeight();
+	    assertEquals(expectedWeight, actualWeight, 0.1);
 	}
 
-	/*@Test
-	public final void testcalcTax(){
-		
-	}*/
+	@After
+	public void tearDown() throws Exception {
+		testOrder=null;
+		testItem=null;
+	}
+
 }

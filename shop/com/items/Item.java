@@ -1,4 +1,5 @@
-package item.details;
+package items;
+
 
 import orders.OrderDetail;
 
@@ -9,28 +10,35 @@ public class Item {
 	private OrderDetail orderDetail;
 	private double price;
 	private double weight;
-	public void setPrice(double price)
+	
+	
+	public void setPriceForQuantity(double price) {
+		if(price<0)
+		{
+			return;
+		}
+		this.price = price;
+	}
+	public void setWeight(double weight) {
+		if(weight<0)
+		{
+			return;
+		}
+		this.weight = weight;
+	}
+	public double getWeight()
 	{
-		this.price=price;
-		
-	}
-	public double getPrice(){
-		
-		return price;
-	}
-	public void setWeight(double weight)
-	{
-		this.weight=weight;
-		
-	}
-	public double getWeight(){
-		
 		return weight;
 	}
 	public double getShippingWeight() {
 		return shippingWeight;
 	}
-	public void setShippingWeight(Double shippingWeight) {
+	public void setShippingWeight(double shippingWeight) {
+		if(shippingWeight<0)
+		{
+			
+			return;
+		}
 		this.shippingWeight = shippingWeight;
 	}
 	public String getDescription() {
@@ -43,7 +51,13 @@ public class Item {
 		return orderDetail;
 	}
 	public void setOrderDetail(OrderDetail orderDetail) {
-		this.orderDetail = orderDetail;
+		if((orderDetail instanceof OrderDetail)&&orderDetail!=null)
+		{
+			this.orderDetail=orderDetail;
+		}
+		return;
+		
+	
 	}
 	public double getPriceForQuantity()
 	{

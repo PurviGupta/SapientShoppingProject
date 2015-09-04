@@ -1,63 +1,82 @@
 package orders;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
+
 import java.util.*;
 
-import payment.details.Payment;
+import payment.Payment;
 import customer.NewCustomer;
 enum Status{processing,dispatched,delivered}
 
 public class Order {
    Date date;
-  Status status;
-   NewCustomer customer;
-   Payment payment;
+   double totalTax=0.0;
+   String status;
+   NewCustomer customer=null;
+   Payment payment=null;
    List<OrderDetail> orderDetail=new ArrayList<OrderDetail>();
-public Date getDate() {
+   public Date getDate() {
 	return date;
-}
-public void setDate() {
-	 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	   //get current date time with Date()
-	   Date date = new Date();
-	   System.out.println(dateFormat.format(date));
-	  
-}
-public Status getStatus() {
+     }
+   public void setDate( Date date) {
+	if((date instanceof Date)&& date!=null)
+	{
+		this.date=date;
+	}
+	
+		return;
+   }
+public String getStatus() {
 	return status;
 }
-public void setStatus(Status status) {
-	this.status = status;
+public void setStatus(String status) {
+			this.status=status;
+	
 }
 public NewCustomer getCustomer() {
 	return customer;
 }
 public void setCustomer(NewCustomer customer) {
-	this.customer = customer;
+	if((customer instanceof NewCustomer)&& customer!=null)
+	{
+		this.customer=customer;
+	}
+	return;
 }
 public Payment getPayment() {
 	return payment;
 }
 public void setPayment(Payment payment) {
-	this.payment = payment;
+	if((payment instanceof Payment)&& payment!=null)
+	{
+		this.payment=payment;
+	}
+	
+	return;
+
+	
+	
 }
-public OrderDetail getOrderDetail() {
+public List<OrderDetail> getOrderDetail() {
 	return orderDetail;
 }
-public void setOrderDetail(OrderDetail orderDetail) {
-	this.orderDetail.add(orderDetail);
+public void setOrderDetail(List<OrderDetail> orderDetail) {
+	
+	
+		this.orderDetail=orderDetail;
+	
+	
 }
    public double calcTax()
    {
-	  Iterator<OrderDetail> it=new iterator();
+	  Iterator<OrderDetail> it=orderDetail. iterator();
 	  OrderDetail orderRef=null;
 	  double tax=0.14;
-	  double totalTax=0.0;
+	
 	  while(it.hasNext())
 	  {
 		 orderRef=it.next();
-		 if(orderRef.getTaxStatus().equals("taxable"))
+		 if(orderRef.getTaxStatus().equalsIgnoreCase("taxable"))
 		 {
 			totalTax= (orderRef.calcSubTotal())*tax;
 			 
@@ -67,7 +86,7 @@ public void setOrderDetail(OrderDetail orderDetail) {
    }
    public double calcTotal()
    {
-	   Iterator<OrderDetail> it=new iterator();
+	   Iterator<OrderDetail> it=orderDetail.iterator();
 		 
 		 
 		  double total=0.0;
@@ -81,7 +100,7 @@ public void setOrderDetail(OrderDetail orderDetail) {
    public double calcTotalWeight()
    {
 
-	   Iterator<OrderDetail> it=new iterator();
+	   Iterator<OrderDetail> it=orderDetail.iterator();
 		 
 		 
 		  double totalWeight=0.0;
