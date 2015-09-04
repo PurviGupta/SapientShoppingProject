@@ -1,16 +1,17 @@
 package orders;
 
-import java.util.Date;
+import java.util.*;
 
 import payment.details.Payment;
 import customer.NewCustomer;
+enum Status{processing,dispatched,delivered}
 
 public class Order {
    Date date;
-   String status;
+  Status status;
    NewCustomer customer;
    Payment payment;
-   OrderDetail orderDetail;
+   List<OrderDetail> orderDetail=new ArrayList<OrderDetail>;
 public Date getDate() {
 	return date;
 }
@@ -21,10 +22,10 @@ public void setDate() {
 	   System.out.println(dateFormat.format(date));
 	  
 }
-public String getStatus() {
+public Status getStatus() {
 	return status;
 }
-public void setStatus(String status) {
+public void setStatus(Status status) {
 	this.status = status;
 }
 public NewCustomer getCustomer() {
@@ -43,18 +44,50 @@ public OrderDetail getOrderDetail() {
 	return orderDetail;
 }
 public void setOrderDetail(OrderDetail orderDetail) {
-	this.orderDetail = orderDetail;
+	this.orderDetail.add(orderDetail);
 }
-   public void calcTax()
+   public double calcTax()
    {
-	   
+	  Iterator<OrderDetail> it=new iterator();
+	  OrderDetail orderRef=null;
+	  double tax=0.14;
+	  double totalTax=0.0;
+	  while(it.hasNext())
+	  {
+		 orderRef=it.next();
+		 if(orderRef.getTaxStatus().equals("taxable"))
+		 {
+			totalTax= (orderRef.calcSubTotal())*tax;
+			 
+		 }
+       }
+	  return totalTax;
    }
-   public void calcTotal()
+   public double calcTotal()
    {
-	   
+	   Iterator<OrderDetail> it=new iterator();
+		 
+		 
+		  double total=0.0;
+		  while(it.hasNext())
+		  {
+			total+=it.next().calcSubTotal();
+			
+	       }
+		  return total;
    }
-   public void calcTotalWeight()
+   public double calcTotalWeight()
    {
-	   
+
+	   Iterator<OrderDetail> it=new iterator();
+		 
+		 
+		  double totalWeight=0.0;
+		  while(it.hasNext())
+		  {
+			totalWeight+=it.next().calcWeight();
+			
+	       }
+		  return totalWeight;
    }
 }
