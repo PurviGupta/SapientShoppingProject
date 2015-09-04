@@ -1,5 +1,7 @@
 package orders;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import payment.details.Payment;
@@ -11,7 +13,7 @@ public class Order {
   Status status;
    NewCustomer customer;
    Payment payment;
-   List<OrderDetail> orderDetail=new ArrayList<OrderDetail>;
+   List<OrderDetail> orderDetail=new ArrayList<OrderDetail>();
 public Date getDate() {
 	return date;
 }

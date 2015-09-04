@@ -7,8 +7,9 @@ public class Item {
 	String shippingWeight;
 	String description;
 	OrderDetail orderDetail;
-	public String getShippingWeight() {
-		return shippingWeight;
+	public double getShippingWeight() {
+		return 0;
+		
 	}
 	public void setShippingWeight(String shippingWeight) {
 		this.shippingWeight = shippingWeight;
@@ -27,10 +28,20 @@ public class Item {
 	}
 	public double getPriceForQuantity()
 	{
+		return 0;
 		
 	}
 	public double getWeight()
 	{
+		return 0;
+		
+	}
+	public void setPriceForQuantity(double d) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setShippingWeight(double d) {
+		// TODO Auto-generated method stub
 		
 	}
 }
