@@ -1,11 +1,12 @@
 package orders;
 
 import item.details.Item;
+enum TaxStatus{taxable,non-taxable}
 
 public class OrderDetail {
 
 	int quantity;
-	String taxStatus;
+	TaxStatus taxStatus;
 	Order order;
 	Item item;
 	
@@ -16,10 +17,10 @@ public class OrderDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public String getTaxStatus() {
+	public TaxStatus getTaxStatus() {
 		return taxStatus;
 	}
-	public void setTaxStatus(String taxStatus) {
+	public void setTaxStatus(TaxStatus taxStatus) {
 		this.taxStatus = taxStatus;
 	}
 	public Order getOrder() {
@@ -34,14 +35,14 @@ public class OrderDetail {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	public void calcSubTotal()
+	public double calcSubTotal()
 	{
-		return	subTotal= (item.getPriceforQuantity()) * quantity;
-				
+		double	subTotal= (item.getPriceforQuantity()) * quantity;
+		return subTotal;		
 	}
-	public void calcWeight()
+	public double  calcWeight()
 	{
-		subWeight = (item.getWeight()) * quantity;
+		double subWeight = (item.getShippingWeight()) * quantity;
 	
 		return subWeight;
 	}
