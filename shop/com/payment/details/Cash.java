@@ -1,15 +1,23 @@
 package payment.details;
 
-public class Cash extends Payment{
+public class Cash extends Payment {
 
-	private double cashTendered;
+	private int cashTendered;
 
-	public double getCashTendered() {
+	public int getCashTendered() {
 		return cashTendered;
 	}
 
-	public void setCashTendered(double cashTendered) {
-		this.cashTendered = cashTendered;
+	public boolean setCashTendered(double cashTendered) {
+		
+		if(cashTendered < 0){
+			return false;
+		} else {
+			this.cashTendered = (int) Math.round(cashTendered);
+			return true;
+		}
+		
 	}
+
 	
 }

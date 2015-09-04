@@ -4,24 +4,28 @@ import orders.Order;
 
 public class Payment {
 
-	private double amount;
+	private int amount;
 	Order order;
-	
-	public double getAmount() {
+
+	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
-		this.amount = amount;
+
+	public boolean setAmount(double amount) {
+		if (amount < 0) {
+			return false;
+		} else {
+			this.amount = (int) Math.round(amount);
+			return true;
+		}
 	}
+
 	public Order getOrder() {
 		return order;
 	}
+
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-	
-	
-	
-	
+
 }
- 
